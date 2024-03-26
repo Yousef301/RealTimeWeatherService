@@ -31,7 +31,7 @@ public class Test
             {
                 WeatherStation tempWeatherStation = weatherDeserializer.DeserializeWeatherInfo(userInput);
 
-                UpdateWeatherStation(weatherStation, tempWeatherStation);
+                weatherStation.UpdateWeatherStation(tempWeatherStation);
 
                 foreach (var bot in _bots.Values)
                 {
@@ -43,12 +43,5 @@ public class Test
 
             Console.WriteLine();
         } while (!userInput.Equals("q"));
-    }
-
-    private static void UpdateWeatherStation(WeatherStation weatherStation, WeatherStation newWeatherData)
-    {
-        weatherStation.Temperature = newWeatherData.Temperature;
-        weatherStation.Humidity = newWeatherData.Humidity;
-        weatherStation.Location = newWeatherData.Location;
     }
 }

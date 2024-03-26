@@ -42,4 +42,11 @@ public class WeatherStation : IObservable
             bot.Update();
         }
     }
+
+    public void UpdateWeatherStation(WeatherStation newWeatherData)
+    {
+        Temperature = newWeatherData.Temperature;
+        Humidity = newWeatherData.Humidity;
+        Location = newWeatherData.Location;
+    }
 }
