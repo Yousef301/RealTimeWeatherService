@@ -39,7 +39,7 @@ public class BotsConfiguration
                     bots[kvp.Key] = weatherBot;
                     break;
                 default:
-                    throw new Exception($"Unknown bot type: {kvp.Key}");
+                    throw new ArgumentException($"{kvp.Key} isn't available yet...");
             }
         }
 

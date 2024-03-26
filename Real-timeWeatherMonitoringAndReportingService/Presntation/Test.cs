@@ -6,7 +6,7 @@ namespace Real_timeWeatherMonitoringAndReportingService.Presntation;
 
 public class Test
 {
-    private static Dictionary<string, IWeatherBot> _bots = BotsConfiguration.LoadConfigurations();
+    private static readonly Dictionary<string, IWeatherBot> _bots = BotsConfiguration.LoadConfigurations();
 
     public static void Run()
     {
