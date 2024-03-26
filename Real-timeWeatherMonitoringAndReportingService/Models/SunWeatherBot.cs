@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Real_timeWeatherMonitoringAndReportingService.Logs;
+using Real_timeWeatherMonitoringAndReportingService.Services;
 
 namespace Real_timeWeatherMonitoringAndReportingService.Models;
 
-public class SnowBot : IBot
+public class SunWeatherBot : IWeatherBot
 {
     [Required(ErrorMessage = "Bot status is required.")]
     public bool Enabled { get; set; }
@@ -15,8 +17,22 @@ public class SnowBot : IBot
     [Range(-100, 100, ErrorMessage = "Temperature Threshold must be in range of -100 to 100.")]
     public int TemperatureThreshold { get; set; }
 
+    public WeatherStation WeatherStation { get; set; }
+
     public void PrintActivateMessage()
     {
         Console.WriteLine(Message);
+    }
+
+    public void Update()
+    {
+        SunBotService sunBotService = new SunBotService();
+
+        if (sunBotService.ActivateBot(TemperatureThreshold, WeatherStation.Temperature))
+        {
+            Enabled = true;
+            Log.BotActivatedMessage("SunBot", Message);
+        }
+        else Enabled = false;
     }
 }
