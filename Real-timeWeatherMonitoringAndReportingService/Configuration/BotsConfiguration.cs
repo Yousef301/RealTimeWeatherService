@@ -6,9 +6,9 @@ namespace Real_timeWeatherMonitoringAndReportingService.Configuration;
 
 public class BotsConfiguration
 {
-    public static Dictionary<string, IBot> LoadConfigurations()
+    public static Dictionary<string, IWeatherBot> LoadConfigurations()
     {
-        Dictionary<string, IBot> bots = new Dictionary<string, IBot>();
+        Dictionary<string, IWeatherBot> bots = new Dictionary<string, IWeatherBot>();
 
         string botsConfigurations =
             File.ReadAllText(AppSettingsManager.GetValue("BotsConfiguration"));
@@ -17,26 +17,26 @@ public class BotsConfiguration
         foreach (var kvp in configDict)
         {
             var botFactory = new BotFactory();
-            IBot bot;
+            IWeatherBot weatherBot;
             switch (kvp.Key)
             {
                 case "RainBot":
-                    bot = botFactory.CreateBot(message: kvp.Value.Message,
+                    weatherBot = botFactory.CreateBot(message: kvp.Value.Message,
                         temperatureThreshold: kvp.Value.TemperatureThreshold,
                         humidityThreshold: kvp.Value.HumidityThreshold, enabled: kvp.Value.Enabled, type: kvp.Key);
-                    bots[kvp.Key] = bot;
+                    bots[kvp.Key] = weatherBot;
                     break;
                 case "SunBot":
-                    bot = botFactory.CreateBot(message: kvp.Value.Message,
+                    weatherBot = botFactory.CreateBot(message: kvp.Value.Message,
                         temperatureThreshold: kvp.Value.TemperatureThreshold,
                         humidityThreshold: kvp.Value.HumidityThreshold, enabled: kvp.Value.Enabled, type: kvp.Key);
-                    bots[kvp.Key] = bot;
+                    bots[kvp.Key] = weatherBot;
                     break;
                 case "SnowBot":
-                    bot = botFactory.CreateBot(message: kvp.Value.Message,
+                    weatherBot = botFactory.CreateBot(message: kvp.Value.Message,
                         temperatureThreshold: kvp.Value.TemperatureThreshold,
                         humidityThreshold: kvp.Value.HumidityThreshold, enabled: kvp.Value.Enabled, type: kvp.Key);
-                    bots[kvp.Key] = bot;
+                    bots[kvp.Key] = weatherBot;
                     break;
                 default:
                     throw new Exception($"Unknown bot type: {kvp.Key}");
