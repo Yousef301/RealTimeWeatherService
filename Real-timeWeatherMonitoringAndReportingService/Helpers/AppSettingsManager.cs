@@ -11,10 +11,6 @@ public class AppSettingsManager
 
     public static string GetValue(string key)
     {
-        var value = _configuration[key];
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine();
         return _configuration[key];
     }
 }
