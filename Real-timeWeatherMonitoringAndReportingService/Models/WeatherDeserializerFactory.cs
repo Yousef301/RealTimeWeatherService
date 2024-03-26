@@ -13,7 +13,8 @@ public class WeatherDeserializerFactory
             case DataFormat.Xml:
                 return new XmlWeatherDeserializer();
             default:
-                throw new ArgumentException($"Invalid type: {type}");
+                Console.WriteLine($"Invalid type: {type}");
+                return null;
         }
     }
 }
