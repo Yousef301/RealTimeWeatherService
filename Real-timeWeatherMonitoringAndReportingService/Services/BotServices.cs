@@ -1,9 +1,11 @@
-﻿namespace Real_timeWeatherMonitoringAndReportingService.Services;
+﻿using Real_timeWeatherMonitoringAndReportingService.Interfaces;
+
+namespace Real_timeWeatherMonitoringAndReportingService.Services;
 
 public abstract class BotServices
 {
     public virtual bool ActivateBot(Dictionary<string, int> thresholds, Dictionary<string, double> values,
-        string botType)
+        IWeatherBot bot)
     {
         foreach (var kvp in values)
         {
@@ -14,10 +16,12 @@ public abstract class BotServices
 
             if (kvp.Value <= thresholds[kvp.Key])
             {
+                bot.Activated = false;
                 return false;
             }
         }
 
+        bot.Activated = true;
         return true;
     }
 }
