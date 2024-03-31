@@ -2,24 +2,30 @@
 
 public class BotFactory
 {
-    public IWeatherBot CreateBot(string type, bool enabled, int temperatureThreshold, int humidityThreshold,
-        string message)
+    public IWeatherBot CreateBot(KeyValuePair<string, BotConfig> botConfiguration)
     {
-        switch (type.ToUpper())
+        switch (botConfiguration.Key.ToUpper())
         {
             case "SNOWBOT":
                 return new SnowWeatherBot()
-                    { Enabled = enabled, Message = message, TemperatureThreshold = temperatureThreshold };
+                {
+                    Message = botConfiguration.Value.Message,
+                    TemperatureThreshold = botConfiguration.Value.TemperatureThreshold
+                };
             case "SUNBOT":
                 return new SunWeatherBot()
-                    { Enabled = enabled, Message = message, TemperatureThreshold = temperatureThreshold };
-                ;
+                {
+                    Message = botConfiguration.Value.Message,
+                    TemperatureThreshold = botConfiguration.Value.TemperatureThreshold
+                };
             case "RAINBOT":
                 return new RainWeatherBot()
-                    { Enabled = enabled, Message = message, HumidityThreshold = humidityThreshold };
-                ;
+                {
+                    Message = botConfiguration.Value.Message,
+                    HumidityThreshold = botConfiguration.Value.HumidityThreshold
+                };
             default:
-                throw new ArgumentException($"{type} isn't available yet...");
+                throw new ArgumentException($"{botConfiguration.Key} isn't available yet...");
         }
     }
 }

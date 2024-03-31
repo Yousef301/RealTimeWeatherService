@@ -6,43 +6,27 @@ namespace Real_timeWeatherMonitoringAndReportingService.Configuration;
 
 public class BotsConfiguration
 {
+    private static readonly BotFactory _botFactory = new BotFactory();
+
     public static Dictionary<string, IWeatherBot> LoadConfigurations()
     {
-        Dictionary<string, IWeatherBot> bots = new Dictionary<string, IWeatherBot>();
+        var bots = new Dictionary<string, IWeatherBot>();
 
-        string botsConfigurations =
-            File.ReadAllText(AppSettingsManager.GetValue("BotsConfiguration"));
-        var configDict = JsonConvert.DeserializeObject<Dictionary<string, BotConfig>>(botsConfigurations);
+        var botsConfiguration = GetBotsConfiguration();
 
-        foreach (var kvp in configDict)
+        foreach (var botConfig in botsConfiguration)
         {
-            var botFactory = new BotFactory();
-            IWeatherBot weatherBot;
-            switch (kvp.Key)
-            {
-                case "RainBot":
-                    weatherBot = botFactory.CreateBot(message: kvp.Value.Message,
-                        temperatureThreshold: kvp.Value.TemperatureThreshold,
-                        humidityThreshold: kvp.Value.HumidityThreshold, enabled: kvp.Value.Enabled, type: kvp.Key);
-                    bots[kvp.Key] = weatherBot;
-                    break;
-                case "SunBot":
-                    weatherBot = botFactory.CreateBot(message: kvp.Value.Message,
-                        temperatureThreshold: kvp.Value.TemperatureThreshold,
-                        humidityThreshold: kvp.Value.HumidityThreshold, enabled: kvp.Value.Enabled, type: kvp.Key);
-                    bots[kvp.Key] = weatherBot;
-                    break;
-                case "SnowBot":
-                    weatherBot = botFactory.CreateBot(message: kvp.Value.Message,
-                        temperatureThreshold: kvp.Value.TemperatureThreshold,
-                        humidityThreshold: kvp.Value.HumidityThreshold, enabled: kvp.Value.Enabled, type: kvp.Key);
-                    bots[kvp.Key] = weatherBot;
-                    break;
-                default:
-                    throw new ArgumentException($"{kvp.Key} isn't available yet...");
-            }
+            if (botConfig.Value.Enabled)
+                bots[botConfig.Key] = _botFactory.CreateBot(botConfig);
         }
 
         return bots;
+    }
+
+    private static Dictionary<string, BotConfig>? GetBotsConfiguration()
+    {
+        var botsConfigurations =
+            File.ReadAllText(AppSettingsManager.GetValue("BotsConfiguration"));
+        return JsonConvert.DeserializeObject<Dictionary<string, BotConfig>>(botsConfigurations);
     }
 }
