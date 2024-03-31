@@ -1,52 +1,40 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Real_timeWeatherMonitoringAndReportingService.Models;
 
-[XmlRoot("WeatherData")]
-public class WeatherStation : IObservable
+public class WeatherStation : WeatherData, IObservable
 {
-    private List<IWeatherBot> Bots = new List<IWeatherBot>();
+    private List<IWeatherBot> _bots = new List<IWeatherBot>();
 
-    [Required(ErrorMessage = "Temperature Threshold is required.")]
-    [StringLength(40, MinimumLength = 5, ErrorMessage = "Message length must be between 5 and 40 characters.")]
-    public string Location { get; set; }
-
-    [Required(ErrorMessage = "Temperature is required.")]
-    [Range(-100.0, 100.0, ErrorMessage = "Temperature must be in range of -100 to 100.")]
-    public double Temperature { get; set; }
-
-    [Required(ErrorMessage = "Humidity is required.")]
-    [Range(-100.0, 100.0, ErrorMessage = "Humidity must be in range of -100 to 100.")]
-    public double Humidity { get; set; }
-
-    public override string ToString()
+    public WeatherStation(List<IWeatherBot> bots)
     {
-        return $"Location -> {Location}\nTemperature -> {Temperature}\nHumidity -> {Humidity}";
+        foreach (var bot in bots)
+        {
+            Add(bot);
+        }
     }
 
     public void Add(IWeatherBot bot)
     {
-        Bots.Add(bot);
+        bot.WeatherStation = this;
+        _bots.Add(bot);
     }
 
     public void Remove(IWeatherBot bot)
     {
-        Bots.Remove(bot);
+        _bots.Remove(bot);
+        bot.WeatherStation = null;
     }
 
-    public void Notify()
-    {
-        foreach (var bot in Bots)
-        {
-            bot.Update();
-        }
-    }
-
-    public void UpdateWeatherStation(WeatherStation newWeatherData)
+    public void Notify(WeatherData newWeatherData)
     {
         Temperature = newWeatherData.Temperature;
         Humidity = newWeatherData.Humidity;
         Location = newWeatherData.Location;
+
+        foreach (var bot in _bots)
+        {
+            bot.Update();
+        }
     }
 }

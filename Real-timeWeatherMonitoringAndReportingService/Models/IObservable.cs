@@ -4,5 +4,5 @@ public interface IObservable
 {
     void Add(IWeatherBot bot);
     void Remove(IWeatherBot bot);
-    void Notify();
+    void Notify(WeatherData newWeatherData);
 }

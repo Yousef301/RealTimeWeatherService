@@ -1,14 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Real_timeWeatherMonitoringAndReportingService.Logs;
+using Real_timeWeatherMonitoringAndReportingService.Outputter;
 using Real_timeWeatherMonitoringAndReportingService.Services;
 
 namespace Real_timeWeatherMonitoringAndReportingService.Models;
 
 public class SunWeatherBot : IWeatherBot
 {
-    [Required(ErrorMessage = "Bot status is required.")]
-    public bool Enabled { get; set; }
-
     [Required(ErrorMessage = "Message is required.")]
     [StringLength(100, MinimumLength = 10, ErrorMessage = "Message length must be between 10 and 100 characters.")]
     public string Message { get; set; }
@@ -19,20 +16,19 @@ public class SunWeatherBot : IWeatherBot
 
     public WeatherStation WeatherStation { get; set; }
 
-    public void PrintActivateMessage()
-    {
-        Console.WriteLine(Message);
-    }
-
     public void Update()
     {
-        SunBotService sunBotService = new SunBotService();
+        var sunBotService = new SunBotService();
 
-        if (sunBotService.ActivateBot(TemperatureThreshold, WeatherStation.Temperature))
+        var thresholds = new Dictionary<string, int>()
+            { { "Temperature Threshold", TemperatureThreshold } };
+
+        var values = new Dictionary<string, double>()
+            { { "Temperature Threshold", WeatherStation.Temperature } };
+
+        if (sunBotService.ActivateBot(thresholds, values, "sun"))
         {
-            Enabled = true;
-            Log.BotActivatedMessage("SunBot", Message);
+            ConsoleOutput.BotActivatedMessage("SunBot", Message);
         }
-        else Enabled = false;
     }
 }
