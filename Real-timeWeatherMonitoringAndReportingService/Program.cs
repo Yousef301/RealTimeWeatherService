@@ -37,10 +37,10 @@ public class Program
 
     private static WeatherData? TryDeserializeInput(string userInput)
     {
-        var deserializers = new List<IWeatherDeserializer>()
+        var deserializers = new List<IRawDataDeserializer<WeatherData>>()
         {
-            new JsonWeatherDeserializer(),
-            new XmlWeatherDeserializer()
+            new JsonRawDataDeserializer<WeatherData>(),
+            new XmlRawDataDeserializer<WeatherData>()
         };
 
         return deserializers.Select(deserializer => deserializer.TryDeserializeWeatherInfo(userInput))
