@@ -2,6 +2,7 @@
 
 public class BotConfig
 {
+    public bool Activated { get; set; }
     public bool Enabled { get; init; }
     public int TemperatureThreshold { get; set; }
     public int HumidityThreshold { get; set; }
