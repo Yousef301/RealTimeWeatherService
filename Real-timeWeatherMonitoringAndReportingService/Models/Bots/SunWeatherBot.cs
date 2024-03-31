@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Real_timeWeatherMonitoringAndReportingService.Interfaces;
+using Real_timeWeatherMonitoringAndReportingService.Models.Weather;
 using Real_timeWeatherMonitoringAndReportingService.Outputter;
 using Real_timeWeatherMonitoringAndReportingService.Services;
 
-namespace Real_timeWeatherMonitoringAndReportingService.Models;
+namespace Real_timeWeatherMonitoringAndReportingService.Models.Bots;
 
 public class SunWeatherBot : IWeatherBot
 {
@@ -28,7 +30,7 @@ public class SunWeatherBot : IWeatherBot
 
         if (sunBotService.ActivateBot(thresholds, values, "sun"))
         {
-            ConsoleOutput.BotActivatedMessage("SunBot", Message);
+            ConsoleOutput.DisplayBotActivationMessage("SunBot", Message);
         }
     }
 }

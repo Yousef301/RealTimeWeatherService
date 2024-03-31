@@ -1,6 +1,7 @@
 ﻿using Real_timeWeatherMonitoringAndReportingService.Configuration;
 using Real_timeWeatherMonitoringAndReportingService.Deserializers;
-using Real_timeWeatherMonitoringAndReportingService.Models;
+using Real_timeWeatherMonitoringAndReportingService.Interfaces;
+using Real_timeWeatherMonitoringAndReportingService.Models.Weather;
 using Real_timeWeatherMonitoringAndReportingService.Outputter;
 using Real_timeWeatherMonitoringAndReportingService.Reader;
 
@@ -18,7 +19,7 @@ public class Program
 
         do
         {
-            ConsoleOutput.MessageOutput("Enter weather data:");
+            ConsoleOutput.DisplayMessage("Enter weather data:");
             userInput = ConsoleInputReader.ReadInput();
             Console.Clear();
 
@@ -29,9 +30,9 @@ public class Program
                 weatherStation.Notify(weatherData);
             }
             else
-                ConsoleOutput.MessageOutput("Invalid data format.");
+                ConsoleOutput.DisplayMessage("Invalid data format.");
 
-            ConsoleOutput.MessageOutput("");
+            ConsoleOutput.DisplayMessage("");
         } while (!userInput.Equals("q"));
     }
 

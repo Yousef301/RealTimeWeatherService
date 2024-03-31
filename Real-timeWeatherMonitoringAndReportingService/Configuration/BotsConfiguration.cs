@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Real_timeWeatherMonitoringAndReportingService.Helpers;
-using Real_timeWeatherMonitoringAndReportingService.Models;
+using Real_timeWeatherMonitoringAndReportingService.Interfaces;
+using Real_timeWeatherMonitoringAndReportingService.Models.Bots;
+using Real_timeWeatherMonitoringAndReportingService.Models.Configurations;
 
 namespace Real_timeWeatherMonitoringAndReportingService.Configuration;
 

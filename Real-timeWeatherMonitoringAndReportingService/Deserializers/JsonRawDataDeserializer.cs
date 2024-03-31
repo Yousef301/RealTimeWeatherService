@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Real_timeWeatherMonitoringAndReportingService.Models;
-using System;
+using Real_timeWeatherMonitoringAndReportingService.Interfaces;
 
 namespace Real_timeWeatherMonitoringAndReportingService.Deserializers
 {

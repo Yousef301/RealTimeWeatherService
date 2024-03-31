@@ -1,4 +1,6 @@
-﻿namespace Real_timeWeatherMonitoringAndReportingService.Models;
+﻿using Real_timeWeatherMonitoringAndReportingService.Models.Weather;
+
+namespace Real_timeWeatherMonitoringAndReportingService.Interfaces;
 
 public interface IWeatherBot
 {

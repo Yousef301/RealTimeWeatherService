@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 
-namespace Real_timeWeatherMonitoringAndReportingService.Models;
+namespace Real_timeWeatherMonitoringAndReportingService.Models.Weather;
 
 [XmlRoot("WeatherData")]
 public class WeatherData

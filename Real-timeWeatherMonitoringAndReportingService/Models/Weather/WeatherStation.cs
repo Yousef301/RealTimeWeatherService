@@ -1,6 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿using Real_timeWeatherMonitoringAndReportingService.Interfaces;
 
-namespace Real_timeWeatherMonitoringAndReportingService.Models;
+namespace Real_timeWeatherMonitoringAndReportingService.Models.Weather;
 
 public class WeatherStation : WeatherData, IObservable
 {

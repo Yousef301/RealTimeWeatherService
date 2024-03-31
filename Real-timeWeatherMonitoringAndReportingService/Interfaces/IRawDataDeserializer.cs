@@ -1,6 +1,6 @@
-﻿namespace Real_timeWeatherMonitoringAndReportingService.Models;
+﻿namespace Real_timeWeatherMonitoringAndReportingService.Interfaces;
 
-public interface IRawDataDeserializer<T>
+public interface IRawDataDeserializer<out T>
 {
     public T? TryDeserializeWeatherInfo(string rawData);
 }

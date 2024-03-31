@@ -1,4 +1,7 @@
-﻿namespace Real_timeWeatherMonitoringAndReportingService.Models;
+﻿using Real_timeWeatherMonitoringAndReportingService.Interfaces;
+using Real_timeWeatherMonitoringAndReportingService.Models.Configurations;
+
+namespace Real_timeWeatherMonitoringAndReportingService.Models.Bots;
 
 public class BotFactory
 {

@@ -1,4 +1,4 @@
-﻿namespace Real_timeWeatherMonitoringAndReportingService.Models;
+﻿namespace Real_timeWeatherMonitoringAndReportingService.Models.Configurations;
 
 public class BotConfig
 {

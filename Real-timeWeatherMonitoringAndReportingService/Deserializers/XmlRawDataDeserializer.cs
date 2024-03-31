@@ -1,6 +1,5 @@
-﻿using System.Xml;
-using System.Xml.Serialization;
-using Real_timeWeatherMonitoringAndReportingService.Models;
+﻿using System.Xml.Serialization;
+using Real_timeWeatherMonitoringAndReportingService.Interfaces;
 
 namespace Real_timeWeatherMonitoringAndReportingService.Deserializers
 {
