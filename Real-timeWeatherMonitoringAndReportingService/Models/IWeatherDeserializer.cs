@@ -2,5 +2,5 @@
 
 public interface IWeatherDeserializer
 {
-    WeatherStation DeserializeWeatherInfo(string rawData);
+    public WeatherData? TryDeserializeWeatherInfo(string rawData);
 }

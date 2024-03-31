@@ -1,18 +1,27 @@
-﻿using System.Xml.Serialization;
+﻿using System.Xml;
+using System.Xml.Serialization;
+using Real_timeWeatherMonitoringAndReportingService.Models;
 
-namespace Real_timeWeatherMonitoringAndReportingService.Models;
-
-public class XmlWeatherDeserializer : IWeatherDeserializer
+namespace Real_timeWeatherMonitoringAndReportingService.Deserializers
 {
-    public WeatherStation DeserializeWeatherInfo(string rawData)
+    public class XmlWeatherDeserializer : IWeatherDeserializer
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(WeatherStation));
+        public WeatherData? TryDeserializeWeatherInfo(string rawData)
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(WeatherData));
 
-        WeatherStation weatherStation;
+                using StringReader reader = new StringReader(rawData);
 
-        using StringReader reader = new StringReader(rawData);
-        weatherStation = (WeatherStation)serializer.Deserialize(reader);
+                WeatherData weatherData = (WeatherData)serializer.Deserialize(reader);
 
-        return weatherStation;
+                return weatherData;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

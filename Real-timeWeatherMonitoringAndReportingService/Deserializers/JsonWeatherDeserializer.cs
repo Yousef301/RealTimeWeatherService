@@ -1,11 +1,19 @@
 ﻿using Newtonsoft.Json;
+using Real_timeWeatherMonitoringAndReportingService.Models;
 
-namespace Real_timeWeatherMonitoringAndReportingService.Models;
+namespace Real_timeWeatherMonitoringAndReportingService.Deserializers;
 
 public class JsonWeatherDeserializer : IWeatherDeserializer
 {
-    public WeatherStation DeserializeWeatherInfo(string rawData)
+    public WeatherData? TryDeserializeWeatherInfo(string rawData)
     {
-        return JsonConvert.DeserializeObject<WeatherStation>(rawData);
+        try
+        {
+            return JsonConvert.DeserializeObject<WeatherData>(rawData);
+        }
+        catch (Exception)
+        {
+            return null;
+        }
     }
 }
