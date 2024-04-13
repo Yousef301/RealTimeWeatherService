@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Real_timeWeatherMonitoringAndReportingService.Outputter;
+using Real_timeWeatherMonitoringAndReportingService.Services;
 
 namespace Real_timeWeatherMonitoringAndReportingService.Models.Bots;
 

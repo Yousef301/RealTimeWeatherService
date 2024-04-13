@@ -8,7 +8,7 @@ public interface IWeatherBot
     public bool Activated { get; set; }
     public string Message { get; set; }
     public WeatherStation WeatherStation { get; set; }
-    public BotServices BotService { get; init; }
+    public IBotService BotService { get; set; }
 
     public void Update();
 }

@@ -17,7 +17,7 @@ public abstract class WeatherBot : IWeatherBot
     public WeatherStation WeatherStation { get; set; }
 
     [Required(ErrorMessage = "BotService is required.")]
-    public BotServices BotService { get; init; }
+    public IBotService BotService { get; set; }
 
     public abstract void Update();
 }

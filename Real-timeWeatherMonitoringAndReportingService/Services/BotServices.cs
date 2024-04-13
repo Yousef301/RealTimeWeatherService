@@ -2,7 +2,7 @@
 
 namespace Real_timeWeatherMonitoringAndReportingService.Services;
 
-public abstract class BotServices
+public abstract class BotServices : IBotService
 {
     public virtual bool ActivateBot(Dictionary<string, int> thresholds, Dictionary<string, double> values,
         IWeatherBot bot)

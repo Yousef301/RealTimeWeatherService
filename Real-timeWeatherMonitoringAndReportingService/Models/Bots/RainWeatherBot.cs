@@ -5,6 +5,7 @@ namespace Real_timeWeatherMonitoringAndReportingService.Models.Bots;
 
 public class RainWeatherBot : WeatherBot
 {
+    
     [Required(ErrorMessage = "Humidity Threshold is required.")]
     [Range(-100, 100, ErrorMessage = "Humidity Threshold must be in range of -100 to 100.")]
     public int HumidityThreshold { get; set; }
